@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github users Data</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background-color: #434343;
+            color: #ffffff;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        #gitData {
+            display: none;
+        } 
+    </style>
+</head>
+<body>
+    <form action="submit">
+        <label for="username">Enter the username: </label>
+        <input type="text" id="username">
+        <button id="submit">Submit</button>
+    </form>
+    <div id="gitData">
+        <h1 id="login"></h1>
+        <img src="" alt="image" id="image">
+        <p>
+            name : <span id="name"> </span><br /> 
+            ID : <span id="id"></span><br /> 
+            Public repositories : <span id="public"></span><br />
+            Followers : <span id="followers"></span><br />
+            Following : <span id="following"></span><br />
+            Created at : <span id="created"></span><br />
+            Last updated : <span id="updated"></span>
+        </p>
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        
+        const username = document.querySelector('input');
+        const login = document.querySelector('#login');
+        const image = document.querySelector('#image');
+        const name = document.querySelector('#name');
+        const id = document.querySelector('#id');
+        const public = document.querySelector('#public');
+        const followers = document.querySelector('#followers');
+        const following = document.querySelector('#following');
+        const created = document.querySelector('#created');
+        const updated = document.querySelector('#updated');
+        const gitData = document.querySelector('#gitData');
+    
+        form.addEventListener('submit', function(e){
+            const xhr = new XMLHttpRequest();
+            e.preventDefault();
+            const requestUrl = `https://api.github.com/users/${username.value}`;
+            console.log(requestUrl);
+            xhr.open('GET',requestUrl);
+            xhr.onreadystatechange = function(){
+                console.log(xhr.readyState);
+                if(xhr.readyState === 4){
+                    let jsonresponse = JSON.parse(this.responseText);
+                    login.innerHTML = jsonresponse.login;
+                    image.src = jsonresponse.avatar_url;
+                    name.innerHTML = jsonresponse.name;
+                    id.innerHTML = jsonresponse.id;
+                    public.innerHTML = jsonresponse.public_repos;
+                    followers.innerHTML = jsonresponse.followers;
+                    following.innerHTML = jsonresponse.following;
+                    created.innerHTML = jsonresponse.created_at;
+                    updated.innerHTML = jsonresponse.updated_at;
+                    gitData.style.display = 'block';
+                }
+            }
+            xhr.send();
+        })
+    </script>
+</body>
+</html>

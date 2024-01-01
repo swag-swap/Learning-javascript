@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Buttons</title>
+    <style>
+        * {
+            margin: 0;
+            background-color: #434343;
+            color: #ffffff; 
+        }
+        body {
+            display: flex;
+            justify-items: center;
+            align-items: center;
+
+        }
+        h1 {
+            text-align: center;
+            width: 100vw;
+            height: 100vh;
+            
+        }
+        #key {
+            /* background-color: #ffffff; */
+            color: rgb(236, 168, 168);
+        }
+    </style>
+</head>
+<body>
+    <h1>Press the key and you will know the key here<br />The key is: <span id="key"></span></h1>
+
+    <script>
+        const key = document.querySelector('#key');
+
+        document.addEventListener('keydown',function(e){
+            key.innerHTML = `${e.key}`;
+            console.log(e);
+        })
+    </script>
+</body>
+</html>

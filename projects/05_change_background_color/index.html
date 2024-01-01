@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change the color </title>
+    <style>
+        * {
+            background-color: #434343;
+            color: rgb(255, 255, 255);
+            overflow: hidden;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2%;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Change the color of background in every second</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <script>
+        const start = document.querySelector("#start");
+        const stop = document.querySelector("#stop");
+        const body = document.querySelector('body');
+        const h1 = document.querySelector('h1');
+        let colorInterval = null;
+
+        const getRandomColor = function (){
+            let r = parseInt(Math.random()*256);
+            let g = parseInt(Math.random()*256);
+            let b = parseInt(Math.random()*256);
+            body.style.backgroundColor = `rgb(${r},${g},${b})`;
+            h1.style.backgroundColor = `rgb(${r},${g},${b})`;
+        }
+
+        start.addEventListener('click',function(e){
+            console.log('Started');
+            if(colorInterval === null)colorInterval = setInterval(getRandomColor,1000);
+            // getRandomColor();
+            
+        })
+
+        stop.addEventListener('click',function(){
+            console.log('Stopped');
+            clearInterval(colorInterval);
+            colorInterval = null
+        })
+    </script>
+</body>
+</html>

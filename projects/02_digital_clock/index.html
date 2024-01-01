@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Digital Clock</title>
+        <style>
+            * {
+                /* height: 100vh; */
+            }
+            body {
+                background-color: #434343;
+                color: #fff; 
+            }
+            .clock {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+            label {
+                padding: 20px;
+                font-size: 2em;
+                height: 100px;
+            }
+            input {
+                font-size: 3em;
+                background-color: #434343;
+                color: #fff;
+                /* padding: 20px; */
+                border-radius: 10px;
+                /* max-width: ; */
+                /* height: 100px; */
+                text-align: center;
+                width: fit-content;
+
+            }
+        </style>
+    </head>
+    <body> 
+        <div class="clock">
+            <label for="clock-letter">Digital Clock</label>
+            <input type="text" id="clock-letter" name="clock-value" value="" readonly>
+        </div>
+        <script>
+            const clock = document.querySelector("#clock-letter");
+            setInterval(() => {
+                let date = new Date();
+                clock.value = (date.toLocaleTimeString());
+            }, 1000);
+        </script>
+    </body>
+</html>
